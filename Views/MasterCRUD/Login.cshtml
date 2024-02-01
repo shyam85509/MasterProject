@@ -1,0 +1,102 @@
+﻿@model Login;
+
+@{
+    Layout = null;
+}
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/bs-brain@2.0.3/components/logins/login-1/assets/css/login-1.css" />
+
+    <style>
+        body {
+            /*background-image: url('/Content/Images/sahb4.jpg');*/
+            background-image: url('https://mdbootstrap.com/img/new/textures/full/171.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .errorclr {
+            color: red;
+            font-size: large;
+            font-family: serif
+        }
+
+        .logbody {
+            width: 30%;
+            margin-left: 35%;
+            padding-top: 15%;
+        }
+
+        .labl {
+            font-size: large;
+            color: aliceblue;
+        }
+
+        #logreg {
+            font-size: 15px;
+            padding-top: 5px;
+            color: white;
+        }
+
+        button {
+            font-size: larger;
+        }
+
+        h5{
+            color:whitesmoke;
+        }
+    </style>
+</head>
+<body>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <!-- Section: Design Block -->
+        <section class="text-center">
+
+            <div class="logbody">
+                <label class="text-warning">
+                    @ViewBag.res
+                </label>
+                <div class="field">
+                    <div class="labl">
+                        @Html.LabelFor(model => model.email)
+                    </div>
+                    <div>
+                        @Html.TextBoxFor(model => model.email, new{@class="form-control input-lg"})
+                    </div>
+                    <div class="errorclr">
+                        @Html.ValidationMessageFor(model => model.email)
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="labl">
+                        @Html.LabelFor(model => model.password)
+                    </div>
+                    <div>
+                        @Html.TextBoxFor(model => model.password, new{@class="form-control input-lg"})
+                    </div>
+                    <div class="errorclr">
+                        @Html.ValidationMessageFor(model => model.password)
+                    </div>
+                </div>
+
+                <div class="logreg">
+                    <br>
+                    <button type="submit" class="btn btn-success">Login</button>
+                    <br> <br>
+                    <a class="p-3 mb-2 bg-light text-danger" asp-area="" asp-controller="MasterCRUD" asp-action="Register">Register here .......... !!</a>
+
+                </div>
+
+            </div>
+        </section>
+        <!-- Section: Design Block -->
+    }
+</body>
+</html>

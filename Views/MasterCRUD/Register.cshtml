@@ -1,0 +1,159 @@
+﻿@model Register
+@{
+    Layout = null;
+
+}
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    <!--not to reload page if there is no value entered and pressed submit button-->
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.6/jquery.validate.unobtrusive.min.js"></script>
+    <!--not to reload page if there is no value entered and pressed submit button-->
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/bs-brain@2.0.3/components/logins/login-1/assets/css/login-1.css" />
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/bs-brain@2.0.3/components/logins/login-1/assets/css/login-1.css" />
+    <style>
+        body {
+            /*background-image: url('/Content/Images/sahb4.jpg');*/
+            background-image: url('https://mdbootstrap.com/img/new/textures/full/171.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            font-family: Arial, Helvetica, sans-serif;
+            margin:5%;
+        }
+
+        .err {
+            color: red;
+        }
+
+        .regform {
+            width: 40%;
+        }
+
+        .flds {
+            margin-top: 3%;
+        }
+    </style>
+</head>
+<body>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="regform">
+            <div class="form-group">
+                <div class="flds">
+                    <div>
+                        @Html.LabelFor(model => model.Maste_ID, new{@class="text-light"})
+                        @Html.TextBoxFor(model =>model.Maste_ID, new{@class="form-control"})
+                        <div class="err">
+                            @Html.ValidationMessageFor(model => model.Maste_ID)
+                        </div>
+                    </div>
+                </div>
+                <div class="flds">
+                    <div>
+                        @Html.LabelFor(model => model.Name, new{@class="text-light"})
+                        @Html.TextBoxFor(model =>model.Name, new{@class="form-control"})
+                        <div class="err">
+                            @Html.ValidationMessageFor(model => model.Name)
+                        </div>
+                    </div>
+                </div>
+                <div class="flds">
+                    <div>
+                        @Html.LabelFor(model => model.email, new{@class="text-light"})
+                        @Html.TextBoxFor(model =>model.email, new{@class="form-control"})
+                        <div class="err">
+                            @Html.ValidationMessageFor(model => model.email)
+                        </div>
+                    </div>
+                </div>
+                <div class="flds">
+                    <div>
+                        @Html.LabelFor(model => model.password, new{@class="text-light"})
+                        @Html.TextBoxFor(model =>model.password, new{@class="form-control"})
+                        <div class="err">
+                            @Html.ValidationMessageFor(model => model.password)
+                        </div>
+                    </div>
+                </div>
+                <div class="flds">
+                    <div>
+                        @Html.LabelFor(model => model.mobile, new{@class="text-light"})
+                        @Html.TextBoxFor(model =>model.mobile, new{@class="form-control"})
+                        <div class="err">
+                            @Html.ValidationMessageFor(model => model.mobile)
+                        </div>
+                    </div>
+                </div>
+                <div class="flds">
+                    <div>
+                        @Html.RadioButtonFor(model => model.gender, "Male", new{id = "Male-true", @class="text-light"})
+                        @Html.Label("Male-true","Male", new{@class="text-warning"})
+                        @Html.RadioButtonFor(model => model.gender, "Female", new{id="Felame-true", @class="text-light"})
+                        @Html.Label("Female-true", "Female", new{@class="text-warning"}) <br>
+                        @Html.LabelFor(model => model.gender, new{@class="text-light"} )
+                        <div class="err">
+                            <label>
+                                @Html.ValidationMessageFor(model => model.gender)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="flds">
+                    <div>
+                        @Html.LabelFor(model => model.age, new{@class="text-light"})
+                        @Html.TextBoxFor(model =>model.age, new{@class="form-control"})
+                        <div class="err">
+                            @Html.ValidationMessageFor(model => model.age)
+                        </div>
+                    </div>
+                </div>
+                <div class="flds">
+                    @Html.DropDownListFor(model => model.department, new List<SelectListItem>{
+                new SelectListItem{Value="", Text="--Select--"},
+                new SelectListItem{Value="HR", Text="HR"},
+                new SelectListItem{Value="Management", Text="Management"},
+                new SelectListItem{Value="Contract Base", Text="Contract Base"},
+                new SelectListItem{Value="Daily Base", Text="Daily Base"},
+                }, new{@class="form-control"})
+                    <div>
+                        @Html.LabelFor(model => model.department, new{@class="text-light"})
+                    </div>
+                </div>
+                <div class="flds">
+                    @Html.DropDownListFor(model => model.nationality, new List<SelectListItem>{
+                new SelectListItem{Value="", Text="--Select--"},
+                new SelectListItem{Value="Indian", Text="Indian"},
+                new SelectListItem{Value="Other Country", Text="Other Country"},
+                }, new{@class="form-control"})
+                    <div>
+
+                        @Html.LabelFor(model => model.nationality, new{@class="text-light"})
+                    </div>
+                </div>
+                <div class="flds">
+                    @Html.DropDownListFor(model => model.status, new List<SelectListItem>{
+                new SelectListItem{Value="", Text="--Select--"},
+                new SelectListItem{Value="True", Text="True"},
+                new SelectListItem{Value="False", Text="False"},
+                }, new{@class="form-control"})
+                    <div>
+                        @Html.LabelFor(model => model.status, new{@class="text-light"} )
+
+                    </div>
+                </div>
+                <div class="reg">
+                    <button class="btn btn-primary" type="submit">Register</button>
+                </div>
+            </div>
+        </div>
+    }
+</body>
+</html>
+
+
