@@ -160,11 +160,49 @@ namespace coretask2.Controllers
         {
             return View();
         }
-        public IActionResult Edit() 
+        public IActionResult Edit(int id) 
         {
-            return View();
+            UpdateMaster obj = GetDataById(id);
+            return View(obj);
         }
+        public UpdateMaster GetDataById(int id)
+        {
+            UpdateMaster obj = null;
+            try
+            {
+                using(con = new SqlConnection(connection))
+                {
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand("select * from master_Task2 where id=@id",con);
+                    cmd.Parameters.AddWithValue("@id", id);
+                    SqlDataAdapter da = new SqlDataAdapter();
+                    da.SelectCommand = cmd;
+                    DataSet ds = new DataSet();
+                    da.Fill(ds);
+                    for(int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                    {
+                        obj = new UpdateMaster();
+                        obj.Id = Convert.ToInt32(ds.Tables[0].Rows[i]["id"].ToString());
+                        obj.Maste_ID = Convert.ToInt32(ds.Tables[0].Rows[i]["Maste_Id"].ToString());
+                        obj.Name = ds.Tables[0].Rows[i]["Name"].ToString();
+                        obj.email = ds.Tables[0].Rows[i]["email"].ToString();
+                        obj.password = ds.Tables[0].Rows[i]["password"].ToString();
+                        obj.mobile = ds.Tables[0].Rows[i]["mobile"].ToString();
+                        obj.gender = ds.Tables[0].Rows[i]["gender"].ToString();
+                        obj.age = Convert.ToByte(ds.Tables[0].Rows[i]["age"].ToString());
+                        obj.department = ds.Tables[0].Rows[i]["department"].ToString();
+                        obj.nationality = ds.Tables[0].Rows[i]["nationality"].ToString();
+                        obj.status = Convert.ToBoolean(ds.Tables[0].Rows[i]["status"].ToString());
+                    }
 
+                }
+                return obj;
+            }
+            catch(Exception)
+            {
+                throw;
+            }
+        }
         public IActionResult Delete(int id)
         {
             try
