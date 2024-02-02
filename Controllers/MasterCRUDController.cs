@@ -155,5 +155,61 @@ namespace coretask2.Controllers
                 throw;
             }
         }
+
+        public IActionResult Detial()
+        {
+            return View();
+        }
+        public IActionResult Edit() 
+        {
+            return View();
+        }
+
+        public IActionResult Delete(int id)
+        {
+            try
+            {
+                using (con = new SqlConnection(connection))
+                {
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand("delete from master_Task2 where id = @id", con);
+                    cmd.Parameters.AddWithValue("@id", id);
+                    int x = cmd.ExecuteNonQuery();
+                    if(x > 0)
+                    {
+                        return RedirectToAction("ShowMaster", "MasterCRUD");
+                    }
+                    else
+                    {
+
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                throw;
+            }
+            return View();
+        }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
