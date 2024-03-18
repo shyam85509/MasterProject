@@ -165,6 +165,47 @@ namespace coretask2.Controllers
             UpdateMaster obj = GetDataById(id);
             return View(obj);
         }
+
+        [HttpPost]
+        public IActionResult Edit(UpdateMaster obj)
+        {
+            try
+            {
+                using (con = new SqlConnection(connection))
+                {
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand("Sp_updates_master_Task2", con);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Maste_ID", Convert.ToInt32(obj.Maste_ID));
+                    cmd.Parameters.AddWithValue("@Id", Convert.ToInt32(obj.Id));
+                    cmd.Parameters.AddWithValue("@Name", obj.Name);
+                    cmd.Parameters.AddWithValue("@email", obj.email);
+                    cmd.Parameters.AddWithValue("@password", obj.password);
+                    cmd.Parameters.AddWithValue("@mobile", obj.mobile);
+                    cmd.Parameters.AddWithValue("@gender", obj.gender);
+                    cmd.Parameters.AddWithValue("@age", Convert.ToByte(obj.age));
+                    cmd.Parameters.AddWithValue("@department", obj.department);
+                    cmd.Parameters.AddWithValue("@nationality", obj.nationality);
+                    cmd.Parameters.AddWithValue("@status", Convert.ToBoolean(obj.status));
+                    int x = cmd.ExecuteNonQuery();
+                    if (x > 0)
+                    {
+                        return RedirectToAction("ShowMaster", "MasterCRUD");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Please Retry");
+                    }
+                }
+                        return View();
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            return View(obj);
+        }
         public UpdateMaster GetDataById(int id)
         {
             UpdateMaster obj = null;

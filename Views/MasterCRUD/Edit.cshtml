@@ -17,51 +17,44 @@
             background-size: cover;
             font-family: Arial, Helvetica, sans-serif;
         }
+
+        
     </style>
     </head>
-</html>
 <body>
     @using (Html.BeginForm())
     {
         
-    }
+    
     <div class="row">
         <div class="col">
+            @Html.HiddenFor(model => model.Id)
             @Html.TextBoxFor(model => model.Maste_ID, new{@class="form-control"})
-            @Html.LabelFor(model => model.Maste_ID, new{@class="text-warning"})
+            @Html.LabelFor(model => model.Maste_ID, new{@class="text-light"})
         </div>
         <div class="col">
             @Html.TextBoxFor(model => model.Name, new{@class="form-control"})
-            @Html.LabelFor(model => model.Name, new{@class="text-warning"})
+                @Html.LabelFor(model => model.Name, new{@class="text-light"})
         </div>
     </div>
 
-        <div class="row">
-        <div class="col">
-            @Html.TextBoxFor(model => model.Maste_ID, new{@class="form-control"})
-            @Html.LabelFor(model => model.Maste_ID, new{@class="text-warning"})
-        </div>
-        <div class="col">
-            @Html.TextBoxFor(model => model.Name, new{@class="form-control"})
-            @Html.LabelFor(model => model.Name, new{@class="text-warning"})
-        </div>
-    </div>
 
     <div class="row">
         <div class="col">
             @Html.TextBoxFor(model => model.email, new{@class="form-control"})
-            @Html.LabelFor(model => model.email, new{@class="text-warning"})
+                @Html.LabelFor(model => model.email, new{@class="text-light"})
         </div>
         <div class="col">
             @Html.TextBoxFor(model => model.password, new{@class="form-control"})
-            @Html.LabelFor(model => model.password, new{@class="text-warning"})
+                @Html.LabelFor(model => model.password, new{@class="text-light"})
+            
         </div>
     </div>
 
     <div class="row">
         <div class="col">
             @Html.TextBoxFor(model => model.mobile, new{@class="form-control"})
-            @Html.LabelFor(model => model.mobile, new{@class="text-warning"})
+                @Html.LabelFor(model => model.mobile, new{@class="text-light"})
         </div>
         <div class="col">
             @Html.RadioButtonFor(model => model.gender, "Male", new{id = "Male-true", @class="text-light"})
@@ -69,22 +62,15 @@
             @Html.RadioButtonFor(model => model.gender, "Female", new{id="Felame-true", @class="text-light"})
             @Html.Label("Female-true", "Female", new{@class="text-warning"}) <br>
             @Html.LabelFor(model => model.gender, new{@class="text-light"} )
-            <div class="err">
-                <label>
-                    @Html.ValidationMessageFor(model => model.gender)
-                </label>
-            </div>
+         
         </div>
     </div>
 
     <div class="row">
         <div class="col">
             <div>
-                @Html.LabelFor(model => model.age, new{@class="text-light"})
                 @Html.TextBoxFor(model =>model.age, new{@class="form-control"})
-                <div class="err">
-                    @Html.ValidationMessageFor(model => model.age)
-                </div>
+                @Html.LabelFor(model => model.age, new{@class="text-light"})
             </div>
         </div>
         <div class="col">
@@ -124,8 +110,10 @@
 
                 </div>
         </div>
-        <div class="col">
-            <input type="submit" class="btn btn-success" />
         </div>
-    </div>
+        <div class="row text-center">
+                <input type="submit" class="btn btn-primary" value="Update record" />
+        </div>
+    }
 </body>
+</html>
